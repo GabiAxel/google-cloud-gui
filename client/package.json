@@ -1,0 +1,26 @@
+{
+  "name": "google-cloud-gui-client",
+  "version": "0.2.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/icons": "1.0.0-beta.43",
+    "axios": "0.18.0",
+    "glamor": "2.20.40",
+    "glamorous": "4.12.4",
+    "lodash": "4.17.10",
+    "material-ui": "1.0.0-beta.42",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-router-dom": "4.2.2",
+    "react-virtualized": "9.18.5",
+    "roboto-fontface": "0.9.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "proxy": "http://localhost:8000"
+}
