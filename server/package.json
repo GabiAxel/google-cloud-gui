@@ -9,6 +9,14 @@
   "author": "Gabriel Axel <guznik@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/gabiaxel/google-cloud-gui",
+  "keywords": [
+    "google cloud platform",
+    "google cloud",
+    "google datastore",
+    "datastore",
+    "datastore emulator",
+    "emulator"
+  ],
   "dependencies": {
     "@google-cloud/datastore": "1.4.0",
     "lodash-id": "0.14.0",
