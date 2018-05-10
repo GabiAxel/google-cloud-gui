@@ -11,11 +11,11 @@ Google Cloud GUI relies on [gcloud](https://cloud.google.com/sdk/gcloud/) for au
 
 ### Installation
 
-`yarn global add google-cloud-gui`
+`yarn global add google-cloud-gui` (recommended)
 
 or
 
-`npm i -g google-cloud-gui`
+`npm i -g google-cloud-gui` (see [#1](https://github.com/GabiAxel/google-cloud-gui/issues/1) and [#2](https://github.com/GabiAxel/google-cloud-gui/issues/2) for known issues and solutions)
 
 ### Starting the server
 
