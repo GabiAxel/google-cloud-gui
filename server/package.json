@@ -1,6 +1,6 @@
 {
   "name": "google-cloud-gui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Google Cloud services and emulator management webapp",
   "bin": "server.sh",
   "scripts": {
