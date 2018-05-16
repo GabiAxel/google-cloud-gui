@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dialog, DialogActions, DialogContent, Button } from 'material-ui'
-import { css } from 'glamor'
-import { sortBy } from 'lodash'
+import { chain } from 'lodash'
+import ReactJson from 'react-json-view'
 
 export default ({entity, onClose}) =>
 <Dialog
@@ -10,20 +10,14 @@ export default ({entity, onClose}) =>
 >
   <DialogContent>
     {entity &&
-      <table className={css({
-        ' td:first-child': {
-          paddingRight: 20
-        }
-      }).toString()}>
-        <tbody>
-          {sortBy(Object.entries(entity), ([key]) => key).map(([key, value]) =>
-            <tr key={key}>
-              <td>{key}</td>
-              <td>{JSON.stringify(value)}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <ReactJson
+        src={chain(entity).toPairs().sortBy(([key]) => key).fromPairs().value()}
+        name={false}
+        enableClipboard={false}
+        displayDataTypes={false}
+        displayObjectSize={false}
+        style={{ width: 500 }}
+      />
     }
   </DialogContent>
   <DialogActions>
