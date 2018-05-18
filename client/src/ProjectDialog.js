@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from 'material-ui'
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@material-ui/core'
 import axios from 'axios'
 
 export default class ProjectDialog extends Component {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dialog, DialogActions, DialogContent, Button } from 'material-ui'
+import { Dialog, DialogActions, DialogContent, Button } from '@material-ui/core'
 import { chain } from 'lodash'
 import ReactJson from 'react-json-view'
 

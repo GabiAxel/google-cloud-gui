@@ -5,7 +5,7 @@ import axios from 'axios'
 import { AutoSizer, InfiniteLoader, Column, Table } from 'react-virtualized'
 import 'react-virtualized/styles.css'
 import { flatMap, sortBy, last } from 'lodash'
-import { Button, Checkbox, IconButton, Snackbar } from 'material-ui'
+import { Button, Checkbox, IconButton, Snackbar } from '@material-ui/core'
 import { Visibility } from '@material-ui/icons'
 
 import ConfirmDialog from '../ConfirmDialog'

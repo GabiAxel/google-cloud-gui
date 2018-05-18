@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dialog, DialogActions, DialogContent, DialogContentText, Button } from 'material-ui'
+import { Dialog, DialogActions, DialogContent, DialogContentText, Button } from '@material-ui/core'
 
 export default ({open, onClose, text, onConfirm, confirmLabel}) =>
   <Dialog
