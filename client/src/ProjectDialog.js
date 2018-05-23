@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@material-ui/core'
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  TextField
+} from '@material-ui/core'
 import axios from 'axios'
 
 export default class ProjectDialog extends Component {
-
   state = {
     projectId: '',
     apiEndpoint: ''
   }
 
-  static getDerivedStateFromProps({open: nextOpen}, {open: prevOpen}) {
-    if(nextOpen && !prevOpen) {
+  static getDerivedStateFromProps({ open: nextOpen }, { open: prevOpen }) {
+    if (nextOpen && !prevOpen) {
       return {
         projectId: '',
         apiEndpoint: ''
@@ -28,27 +34,23 @@ export default class ProjectDialog extends Component {
   }
 
   render() {
-
     const { open, onClose } = this.props
     const { projectId, apiEndpoint } = this.state
 
-    return(
-      <Dialog
-        open={open}
-        onClose={onClose}
-      >
+    return (
+      <Dialog open={open} onClose={onClose}>
         <DialogTitle>New Project Connection</DialogTitle>
         <DialogContent>
           <TextField
             value={projectId}
-            onChange={e => this.setState({projectId: e.target.value})}
+            onChange={e => this.setState({ projectId: e.target.value })}
             autoFocus
             label="Project ID (required)"
             fullWidth
           />
           <TextField
             value={apiEndpoint}
-            onChange={e => this.setState({apiEndpoint: e.target.value})}
+            onChange={e => this.setState({ apiEndpoint: e.target.value })}
             type="url"
             label="API endpoint (eg. emulator host:port, optional)"
             fullWidth
@@ -59,10 +61,10 @@ export default class ProjectDialog extends Component {
             onClick={this.saveConnection}
             disabled={!projectId}
             color="primary"
-          >Save</Button>
-          <Button
-            onClick={onClose}
-          >Cancel</Button>
+          >
+            Save
+          </Button>
+          <Button onClick={onClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
     )

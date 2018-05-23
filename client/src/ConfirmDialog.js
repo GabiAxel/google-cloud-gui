@@ -1,11 +1,14 @@
 import React from 'react'
-import { Dialog, DialogActions, DialogContent, DialogContentText, Button } from '@material-ui/core'
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  Button
+} from '@material-ui/core'
 
-export default ({open, onClose, text, onConfirm, confirmLabel}) =>
-  <Dialog
-    open={open}
-    onClose={onClose}
-  >
+export default ({ open, onClose, text, onConfirm, confirmLabel }) => (
+  <Dialog open={open} onClose={onClose}>
     <DialogContent>
       <DialogContentText>{text}</DialogContentText>
     </DialogContent>
@@ -16,7 +19,10 @@ export default ({open, onClose, text, onConfirm, confirmLabel}) =>
           onClose()
         }}
         color="primary"
-      >{confirmLabel}</Button>
+      >
+        {confirmLabel}
+      </Button>
       <Button onClick={onClose}>Cancel</Button>
     </DialogActions>
   </Dialog>
+)

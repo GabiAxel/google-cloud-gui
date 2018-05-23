@@ -6,11 +6,13 @@ const { projects } = require('./db')
 module.exports = [
   get('/projects', () => json(projects.value())),
   post('/projects', ({ data: { projectId, apiEndpoint } }) => {
-    const project = projects.insert({
-      service: 'datastore',
-      projectId,
-      apiEndpoint
-    }).write()
+    const project = projects
+      .insert({
+        service: 'datastore',
+        projectId,
+        apiEndpoint
+      })
+      .write()
     return json(project)
   }),
   post('/projects/:id/remove', ({ params: { id } }) => {

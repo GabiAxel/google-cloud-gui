@@ -17,7 +17,6 @@ const renderIdOrName = key => {
 }
 
 export default class DatastoreKind extends Component {
-
   state = {
     entities: null,
     cursor: null,
@@ -31,8 +30,8 @@ export default class DatastoreKind extends Component {
     this.runQuery()
   }
 
-  componentDidUpdate({kind}) {
-    if(this.props.kind !== kind) {
+  componentDidUpdate({ kind }) {
+    if (this.props.kind !== kind) {
       this.runQuery()
     }
   }
@@ -51,21 +50,27 @@ export default class DatastoreKind extends Component {
   }
 
   getQueryReqults = async () => {
-    if(!this.moreResults) {
+    if (!this.moreResults) {
       return
     }
     this.moreResults = false
-    this.setState({loading: true})
+    this.setState({ loading: true })
     const { id, kind, namespace } = this.props
-    const { data } = await axios.get(`/datastore/${id}/${namespace}/kinds/${kind}/query`, {
-      params: { cursor: this.cursor }
-    })
+    const { data } = await axios.get(
+      `/datastore/${id}/${namespace}/kinds/${kind}/query`,
+      {
+        params: { cursor: this.cursor }
+      }
+    )
     const entities = data[0]
     const info = data[1]
     const allEntities = [...(this.state.entities || []), ...entities]
-    this.moreResults = info.moreResults !== 'NO_MORE_RESULTS' && this.cursor !== info.endCursor
+    this.moreResults =
+      info.moreResults !== 'NO_MORE_RESULTS' && this.cursor !== info.endCursor
     this.cursor = info.endCursor
-    const columns = [...new Set(flatMap(allEntities, entity => Object.keys(entity)))]
+    const columns = [
+      ...new Set(flatMap(allEntities, entity => Object.keys(entity)))
+    ]
     this.setState({
       loading: false,
       entities: allEntities,
@@ -80,16 +85,18 @@ export default class DatastoreKind extends Component {
 
   getRowData = i =>
     Object.assign(
-      ...Object.entries(this.state.entities[i])
-        .map(([key, value]) => ({[key]: key === '__key__' ?
-        renderIdOrName(value) : JSON.stringify(value)}))
+      ...Object.entries(this.state.entities[i]).map(([key, value]) => ({
+        [key]: key === '__key__' ? renderIdOrName(value) : JSON.stringify(value)
+      }))
     )
 
   deleteEntities = async () => {
     const { entities, selectedKeys } = this.state
     this.setState({
       selectedKeys: [],
-      entities: entities.filter(entity => !selectedKeys.includes(entity.__key__)),
+      entities: entities.filter(
+        entity => !selectedKeys.includes(entity.__key__)
+      ),
       deleting: true
     })
     const { id, namespace } = this.props
@@ -98,31 +105,32 @@ export default class DatastoreKind extends Component {
   }
 
   render() {
+    const {
+      columns,
+      entities,
+      selectedKeys,
+      viewedEntity,
+      loading,
+      deleting,
+      promptDelete
+    } = this.state
 
-    const { columns, entities, selectedKeys, viewedEntity, loading, deleting, promptDelete } = this.state
-
-    return(
-      <Div
-        flex={1}
-        display="flex"
-        flexDirection="column"
-      >
+    return (
+      <Div flex={1} display="flex" flexDirection="column">
         <Div>
-          <Button
-            onClick={() => this.runQuery()}
-            color="primary"
-          >Refresh</Button>
+          <Button onClick={() => this.runQuery()} color="primary">
+            Refresh
+          </Button>
           <Button
             onClick={() => this.setState({ promptDelete: true })}
             disabled={selectedKeys.length === 0}
             color="primary"
-          >Delete</Button>
+          >
+            Delete
+          </Button>
         </Div>
-        <Div
-          flex={1}
-          fontSize="small"
-        >
-          {entities &&
+        <Div flex={1} fontSize="small">
+          {entities && (
             <AutoSizer>
               {({ height, width }) => (
                 <InfiniteLoader
@@ -140,62 +148,78 @@ export default class DatastoreKind extends Component {
                       rowGetter={({ index }) => this.getRowData(index)}
                       rowHeight={30}
                       width={width}
-                      headerClassName={css({ textTransform: 'none !important' }).toString()}
-                      gridClassName={css({ outline: 'none !important' }).toString()}
+                      headerClassName={css({
+                        textTransform: 'none !important'
+                      }).toString()}
+                      gridClassName={css({
+                        outline: 'none !important'
+                      }).toString()}
                     >
                       <Column
                         dataKey="__key__"
                         minWidth={100}
                         width={100}
-                        cellRenderer={({rowIndex}) =>
+                        cellRenderer={({ rowIndex }) => (
                           <Div display="flex">
                             <Checkbox
-                              checked={selectedKeys.includes(entities[rowIndex].__key__)}
+                              checked={selectedKeys.includes(
+                                entities[rowIndex].__key__
+                              )}
                               onChange={() => {
                                 const key = entities[rowIndex].__key__
                                 this.setState({
-                                  selectedKeys: selectedKeys.includes(key) ?
-                                    selectedKeys.filter(k => k !== key) :
-                                    [...selectedKeys, key]
+                                  selectedKeys: selectedKeys.includes(key)
+                                    ? selectedKeys.filter(k => k !== key)
+                                    : [...selectedKeys, key]
                                 })
                               }}
                               color="primary"
                             />
-                            <IconButton onClick={() => this.setState({viewedEntity: entities[rowIndex]})}>
-                              <Visibility/>
+                            <IconButton
+                              onClick={() =>
+                                this.setState({
+                                  viewedEntity: entities[rowIndex]
+                                })
+                              }
+                            >
+                              <Visibility />
                             </IconButton>
                           </Div>
-                        }
+                        )}
                       />
-                      {columns.map(({dataKey, label, width}) =>
+                      {columns.map(({ dataKey, label, width }) => (
                         <Column
                           key={dataKey}
                           dataKey={dataKey}
                           label={label}
                           width={width}
                         />
-                      )}
+                      ))}
                     </Table>
                   )}
                 </InfiniteLoader>
               )}
             </AutoSizer>
-          }
+          )}
         </Div>
         <Snackbar
-          anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={deleting || loading}
           message={deleting ? 'Deleting...' : 'Loading...'}
         />
         <EntityDialog
           entity={viewedEntity}
-          onClose={() => this.setState({viewedEntity: null})}
+          onClose={() => this.setState({ viewedEntity: null })}
         />
         <ConfirmDialog
           open={promptDelete}
-          text={selectedKeys.length === 1 ? 'Delete entity?' : `Delete ${selectedKeys.length} entities?`}
+          text={
+            selectedKeys.length === 1
+              ? 'Delete entity?'
+              : `Delete ${selectedKeys.length} entities?`
+          }
           confirmLabel="Delete"
-          onClose={() => this.setState({promptDelete: false})}
+          onClose={() => this.setState({ promptDelete: false })}
           onConfirm={this.deleteEntities}
         />
       </Div>

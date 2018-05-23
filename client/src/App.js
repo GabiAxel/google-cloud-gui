@@ -3,10 +3,8 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import ProjectList from './ProjectList'
 
-export default () =>
+export default () => (
   <BrowserRouter>
-    <Route
-      path="/:id?/:namespace?/:kind?"
-      component={ProjectList}
-    />
+    <Route path="/:id?/:namespace?/:kind?" component={ProjectList} />
   </BrowserRouter>
+)
