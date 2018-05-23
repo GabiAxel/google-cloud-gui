@@ -29,13 +29,23 @@ Optional flags:
 
 ### Using the GUI
 
-The GUI should be available at `http://localhost:<PORT>` (default `http://localhost:8000`)
+The GUI should be available at `http://localhost:<PORT>` (default `http://localhost:8000`) and will initially show no projects.
+
+![Initial state](screenshots/1_initial.png)
 
 Start by adding a project by clicking the top left "+" button. In the dialog enter the project ID and the emulator host:port, or leave it empty to use the production Datastore.
 
+![New project dialog](screenshots/2_new.png)
+
 The projects are stored in the file `~/.google-cloud-gui-db.json`
 
-After adding a project, you will be able to browse the Datastore namespaces, kinds and entities. At the moment you can only view and delete entities (no creation or editing).
+After adding a project, you will be able to browse the Datastore namespaces, kinds and entities.
+
+![Kinds and entities](screenshots/3_kind.png)
+
+At the moment you can only view and delete entities (no creation or editing). Click the eye icon to view an entity as a tree (useful for large or nested entities that don't fit in a table row).
+
+![Entity dialog](screenshots/4_entity.png)
 
 ### Development
 
