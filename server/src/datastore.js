@@ -70,7 +70,7 @@ module.exports = [
           path
             .map(({ kind, id, name }) => [
               kind,
-              id ? datastore.intValue(id) : name
+              id ? datastore.int(id) : name
             ])
             .reduce((a, b) => [...a, ...b], [])
         )
