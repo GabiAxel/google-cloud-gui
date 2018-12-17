@@ -3,21 +3,24 @@
   "version": "0.2.2",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "1.0.0",
-    "@material-ui/icons": "1.0.0",
+    "@material-ui/core": "3.7.0",
+    "@material-ui/icons": "3.0.1",
     "axios": "0.18.0",
     "glamor": "2.20.40",
     "glamorous": "4.13.0",
     "lodash": "4.17.10",
-    "react": "16.3.2",
-    "react-dom": "16.3.2",
-    "react-json-view": "1.16.6",
-    "react-router-dom": "4.2.2",
-    "react-virtualized": "9.19.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-json-view": "1.19.1",
+    "react-router-dom": "4.3.1",
+    "react-virtualized": "9.21.0",
     "roboto-fontface": "0.9.0"
   },
   "devDependencies": {
-    "react-scripts": "1.1.4"
+    "react-scripts": "2.1.1"
+  },
+  "resolutions": {
+    "upath": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
