@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.3 ( August 15, 2021 )
+- Fixed entity deletion (#6)
+
 ## 0.2.2 ( May 23, 2018 )
 - Changed entity dialog display to a formatted collapsible tree (#5)
 - Added screenshots
